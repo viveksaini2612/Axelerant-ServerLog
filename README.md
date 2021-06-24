@@ -8,3 +8,8 @@
  # awk '{ print $1}' access.log.2021-06-24 | sort | uniq -c | sort -nr | head -n 5
  
 # List the past 10-days 4XX results of Apache's access log file, sorted by date with their IP address
+grep "$(date +%d/%b/%Y)" /var/log/httpd/access.log | cut -d' ' -f1 | sort | uniq -c | sort -g
+
+
+#  to view the top 10 disk-space users
+find . -user user -type f exec df -h {} \;|awk '{ s = s+$1 } END { print "Total used: ",s }'
